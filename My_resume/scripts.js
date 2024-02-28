@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add more projects as needed
     ];
 
-    const timeline = document.getElementById('timeline');
+    const employmentTimeline = document.getElementById('employment-timeline');
+    const projectTimeline = document.getElementById('project-timeline');
 
     // Function to create and append timeline entries
     function createTimelineEntry(item, index, isProject = false) {
@@ -67,7 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
         entry.appendChild(dateOrDuration);
         entry.appendChild(content);
 
-        timeline.appendChild(entry);
+        if (isProject) {
+            projectTimeline.appendChild(entry);
+        } else {
+            employmentTimeline.appendChild(entry);
+        }
 
         entry.addEventListener('click', function() {
             description.style.display = description.style.display === 'none' ? 'block' : 'none';
@@ -82,5 +87,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Append project data entries
     projectData.forEach((item, index) => {
         createTimelineEntry(item, index, true);
-    });
-});
+    })
