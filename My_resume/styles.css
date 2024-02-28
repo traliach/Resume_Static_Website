@@ -45,9 +45,12 @@ body, html {
 }
 
 .resume-section h2 {
+    background-color: #007bff; /* Blue background for section headers */
+    color: white;
+    padding: 5px 10px;
+    display: inline-block;
+    font-size: 1.2em;
     margin-bottom: .5em;
-    color: #333;
-    font-weight: 600;
 }
 
 ul {
@@ -61,29 +64,11 @@ li {
     font-weight: 400;
 }
 
-#education p {
-    font-style: italic;
-}
-
-.degree {
-    font-weight: bold;
-    display: block;
-    margin-top: 1em;
-}
-
-.school {
-    display: block;
-    margin-bottom: 0.3em;
-}
-
 .timeline-content p {
     font-style: italic;
     margin-top: 0.5em;
     color: #555;
-}
-
-.resume-header {
-    text-align: center;
+    transition: all 0.3s ease-in-out; /* Transition for smooth toggling of description */
 }
 
 /* Timeline Styles */
@@ -116,42 +101,15 @@ li {
     color: #333;
 }
 
-/* Transition for smooth toggling of description */
-.timeline-content p {
-    transition: all 0.3s ease-in-out;
-}
-
-/* Style for hiding/showing description */
+/* Hidden by default, shown on click */
 .hidden {
     display: none;
 }
 
-.shown {
-    display: block;
-}
-
-/* Section Styles */
-.resume-section h2 {
-    background-color: #007bff; /* Blue background for section headers */
-    color: white;
-    padding: 5px 10px;
-    display: inline-block;
-    font-size: 1.2em;
-}
-
 /* LinkedIn Icon Style */
-.linkedin-icon {
+.linkedin-icon img {
     display: inline-block;
-    width: 20px; /* Further reduced size */
+    width: 20px; /* Adjusted size */
     height: 20px;
     margin: 5px;
 }
-
-.linkedin-icon img {
-    width: 100%;
-    height: auto;
-}
-
-
-
-/* Add any additional styles below */

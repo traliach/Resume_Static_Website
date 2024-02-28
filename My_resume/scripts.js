@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Employment history data
+    // Data for employment history
     const timelineData = [
         {
             date: 'August 2018 – Present',
@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
             title: 'AWS Cloud Engineer – Remote',
             description: 'At Dominion Systems, Maryland, USA, participated in multiple DevOps operations using AWS offerings like CloudFormation and CodePipeline. Configured and deployed elastic computing resources and administered RDS and non-relational databases.'
         },
-        // Add more entries as needed
+        // Additional entries can be added here
     ];
 
-    // Project data
+    // Data for projects
     const projectData = [
         {
             title: 'Onboarding Project – Farmers.com/css - Zurich Farmers',
@@ -31,17 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             impact: 'Significantly enhanced customer satisfaction and operational efficiency.'
         }
-        // Add more projects as needed
+        // Additional projects can be added here
     ];
 
     const employmentTimeline = document.getElementById('employment-timeline');
     const projectTimeline = document.getElementById('project-timeline');
 
     // Function to create and append timeline entries
-    function createTimelineEntry(item, index, isProject = false) {
+    function createTimelineEntry(item, container, isProject = false) {
         let entry = document.createElement('div');
         entry.classList.add('timeline-entry');
-        entry.setAttribute('id', isProject ? 'project-entry-' + index : 'entry-' + index);
 
         let dot = document.createElement('div');
         dot.classList.add('timeline-dot');
@@ -52,14 +51,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let content = document.createElement('div');
         content.classList.add('timeline-content');
-        content.setAttribute('id', isProject ? 'project-content-' + index : 'content-' + index);
 
         let title = document.createElement('h3');
         title.textContent = item.title;
 
         let description = document.createElement('p');
         description.textContent = isProject ? item.overview : item.description;
-        description.style.display = 'none'; // Initially hide the description
+        description.classList.add('hidden'); // Utilize a CSS class to toggle visibility
 
         content.appendChild(title);
         content.appendChild(description);
@@ -68,23 +66,21 @@ document.addEventListener('DOMContentLoaded', function() {
         entry.appendChild(dateOrDuration);
         entry.appendChild(content);
 
-        if (isProject) {
-            projectTimeline.appendChild(entry);
-        } else {
-            employmentTimeline.appendChild(entry);
-        }
+        container.appendChild(entry);
 
+        // Toggle the display of the description on click
         entry.addEventListener('click', function() {
-            description.style.display = description.style.display === 'none' ? 'block' : 'none';
+            description.classList.toggle('hidden');
         });
     }
 
     // Append employment history entries
-    timelineData.forEach((item, index) => {
-        createTimelineEntry(item, index);
+    timelineData.forEach((item) => {
+        createTimelineEntry(item, employmentTimeline);
     });
 
-    // Append project data entries
-    projectData.forEach((item, index) => {
-        createTimelineEntry(item, index, true);
-    })
+    // Append project entries
+    projectData.forEach((item) => {
+        createTimelineEntry(item, projectTimeline, true);
+    });
+});
