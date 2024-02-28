@@ -109,7 +109,7 @@ li {
 /* LinkedIn Icon Style */
 .linkedin-icon img {
     display: inline-block;
-    width: 10px; /* Adjusted size */
-    height: 10px;
+    width: 1px; /* Adjusted size */
+    height: 1px;
     margin: 5px;
 }
