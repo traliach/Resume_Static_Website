@@ -36,41 +36,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const timeline = document.getElementById('timeline');
 
-    timelineData.forEach((item, index) => {
+    // Function to create and append timeline entries
+    function createTimelineEntry(item, index, isProject = false) {
         let entry = document.createElement('div');
         entry.classList.add('timeline-entry');
-        entry.setAttribute('id', 'entry-' + index);
+        entry.setAttribute('id', isProject ? 'project-entry-' + index : 'entry-' + index);
 
         let dot = document.createElement('div');
         dot.classList.add('timeline-dot');
 
-        let date = document.createElement('div');
-        date.textContent = item.date;
-        date.classList.add('timeline-date');
+        let dateOrDuration = document.createElement('div');
+        dateOrDuration.textContent = isProject ? item.duration : item.date;
+        dateOrDuration.classList.add('timeline-date');
 
         let content = document.createElement('div');
         content.classList.add('timeline-content');
-        content.setAttribute('id', 'content-' + index);
+        content.setAttribute('id', isProject ? 'project-content-' + index : 'content-' + index);
 
         let title = document.createElement('h3');
         title.textContent = item.title;
 
         let description = document.createElement('p');
-        description.textContent = item.description;
+        description.textContent = isProject ? item.overview : item.description;
         description.style.display = 'none'; // Initially hide the description
-
-        // Click event to toggle the description visibility
-        entry.addEventListener('click', function() {
-            description.style.display = description.style.display === 'none' ? 'block' : 'none';
-        });
 
         content.appendChild(title);
         content.appendChild(description);
 
         entry.appendChild(dot);
-        entry.appendChild(date);
+        entry.appendChild(dateOrDuration);
         entry.appendChild(content);
 
         timeline.appendChild(entry);
+
+        entry.addEventListener('click', function() {
+            description.style.display = description.style.display === 'none' ? 'block' : 'none';
+        });
+    }
+
+    // Append employment history entries
+    timelineData.forEach((item, index) => {
+        createTimelineEntry(item, index);
+    });
+
+    // Append project data entries
+    projectData.forEach((item, index) => {
+        createTimelineEntry(item, index, true);
     });
 });
