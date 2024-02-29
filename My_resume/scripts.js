@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Create headshot image element
     const headshot = document.createElement('img');
-    headshot.src = 'path_to_your_headshot.jpg'; // Update with the path to your headshot image
-    headshot.alt = 'Your Name';
+    headshot.src = 'C:\Users\Achille T\Documents\GitHub\Resume_for_Static_Website\My_resume\headshot.jpg'; // Update with the path to your headshot image
+    headshot.alt = 'Ali Achille Traore';
     headshot.classList.add('resume-headshot');
 
     // Append headshot to the top section
@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Social media icons
     const socialMediaLinks = {
-        linkedin: 'your_linkedin_profile_url',
-        github: 'your_github_profile_url'
+        linkedin: 'linkedin.com/in/ali-achille-traore',
+        github: 'https://github.com/traliach'
         // Add more social media profiles as needed
     };
 
