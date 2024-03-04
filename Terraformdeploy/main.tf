@@ -53,6 +53,7 @@ resource "azurerm_storage_account" "resume" {
   }
 }
 
+
 # Create a CDN profile
 resource "azurerm_cdn_profile" "resume_cdn_profile" {
   name                = var.cdn_profile_name
