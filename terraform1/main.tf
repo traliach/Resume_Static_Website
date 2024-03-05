@@ -1,6 +1,8 @@
 locals {
-  storage_account_hostname = replace(azurerm_storage_account.resume.primary_web_endpoint, "https://", "")
+  // Remove 'https://' and trailing slashes from the storage account's primary web endpoint
+  storage_account_hostname = replace(replace(azurerm_storage_account.resume.primary_web_endpoint, "https://", ""), "/$", "")
 }
+
 
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
