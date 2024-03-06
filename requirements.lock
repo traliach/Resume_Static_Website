@@ -14,23 +14,28 @@ cattrs==23.2.3
     # via jsii
 cdktf==0.20.4
     # via cdktf-cdktf-provider-aws
+    # via cdktf-cdktf-provider-azurerm
     # via cdktf-cdktf-provider-google
 cdktf-cdktf-provider-aws==19.8.1
+cdktf-cdktf-provider-azurerm==12.8.0
 cdktf-cdktf-provider-google==13.8.0
 constructs==10.3.0
     # via cdktf
     # via cdktf-cdktf-provider-aws
+    # via cdktf-cdktf-provider-azurerm
     # via cdktf-cdktf-provider-google
 importlib-resources==6.1.2
     # via jsii
 jsii==1.95.0
     # via cdktf
     # via cdktf-cdktf-provider-aws
+    # via cdktf-cdktf-provider-azurerm
     # via cdktf-cdktf-provider-google
     # via constructs
 publication==0.0.3
     # via cdktf
     # via cdktf-cdktf-provider-aws
+    # via cdktf-cdktf-provider-azurerm
     # via cdktf-cdktf-provider-google
     # via constructs
     # via jsii
@@ -41,6 +46,7 @@ six==1.16.0
 typeguard==2.13.3
     # via cdktf
     # via cdktf-cdktf-provider-aws
+    # via cdktf-cdktf-provider-azurerm
     # via cdktf-cdktf-provider-google
     # via constructs
     # via jsii
