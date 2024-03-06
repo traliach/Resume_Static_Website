@@ -1,0 +1,45 @@
+* Build and Deploy Your Resume Website Using HTML, CSS, JavaScript, and AWS
+
+** Step 1: Build Your Resume Website
+   :PROPERTIES:
+   :CUSTOM_ID: build-your-resume
+   :END:
+   - HTML: Create an =index.html= file with semantic tags like =<header>=, =<section>=, and =<footer>= for structuring your resume.
+   - CSS: Link a =styles.css= file in your HTML for styling (focus on layout, typography, color schemes).
+   - JavaScript: Add interactivity with a =script.js= file (e.g., light/dark mode toggle, dynamic content).
+
+** Step 2: Upload to AWS S3 and Configure for Static Website Hosting
+   :PROPERTIES:
+   :CUSTOM_ID: upload-aws-s3
+   :END:
+   - Create an S3 Bucket: Ensure a unique name and disable ‘Block all public access’.
+   - Upload Files: Upload your HTML, CSS, and JavaScript files.
+   - Static Website Hosting: Enable this feature and set =index.html= as both the index and error document.
+   - Bucket Policy: Update to allow public read access.
+
+** Step 3: Use Route 53 for a Custom Domain
+   :PROPERTIES:
+   :CUSTOM_ID: use-route-53
+   :END:
+   - Register/Transfer Domain: Use Route 53 for a new or existing domain.
+   - Create Hosted Zone: Generates DNS records for your domain.
+   - Update DNS Records: Link your S3 bucket to your domain with a new record set.
+
+** Step 4: Set Up SSL/TLS with AWS Certificate Manager
+   :PROPERTIES:
+   :CUSTOM_ID: setup-ssl-tls
+   :END:
+   - Request a Certificate: Verify domain ownership through AWS Certificate Manager.
+   - ACM Certificate: Attach the verified certificate for secure connections.
+
+** Step 5: Create a CloudFront Distribution
+   :PROPERTIES:
+   :CUSTOM_ID: create-cloudfront
+   :END:
+   - Create Distribution: Select your S3 bucket as the origin and configure SSL/TLS.
+   - Custom Domain: Specify in the “Alternate Domain Names (CNAMEs)” field.
+   - Deployment: Accessible globally through CloudFront post-deployment.
+
+* Notes
+  - This guide assumes basic knowledge of AWS services and web development.
+  - Ensure compliance with AWS pricing and policies.
