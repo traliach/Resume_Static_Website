@@ -22,6 +22,33 @@ Refer to:
 - [[https://12factor.net/][Twelve-Factor App]]
 - [[https://developer.hashicorp.com/terraform/language/values/variables#variables-on-the-command-line][Terraform Input Variables]]
 
+  Variables can be set from the CLI directly or through Environment
+
+  #+begin_src bash
+
+  terraform apply -var="image_id=ami-abc123"
+  terraform apply -var='image_id_list=["ami-abc123","ami-def456"]' -var="instance_type=t2.micro"
+  terraform apply -var='image_id_map={"us-east-1":"ami-abc123","us-east-2":"ami-def456"}'
+
+  #+end_src
+
+  But using a **.tfvars** file such as /testing.tfvars/ seem more convenient
+
+  #+begin_src terraform testing.tfvars
+
+  name=Achille
+  profession=DevOps Engineer
+
+  #+end_src
+
+  #+begin_src bash
+
+  terraform apply -var-file="testing.tfvars"
+
+  #+end_src
+
+
+
 *** TODO **Step3:** Do Terraform HCL with multiple provider modules here
 
 *** TODO **Step4:** Do Terraform CDK conversion of HCL from step3 here
