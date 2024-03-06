@@ -1,31 +1,36 @@
-# resume_for_Static_Website
 
-# Part 1 : deploying a Web-Based Resume: Manual AWS Method
+* achille-resume-static-website
 
-* Deploying a Web-Based Resume: Manual AWS Method
+*** TODO Add a meaningful description here
+
+* resume_for_Static_Website
+
+** Part 1 : deploying a Web-Based Resume: Manual AWS Method
+
+*** Deploying a Web-Based Resume: Manual AWS Method
 This method guides you through manually creating and deploying a personal resume website using basic web technologies. It leverages HTML, CSS, and JavaScript for site construction and AWS services for hosting and distribution. The process involves using Amazon S3 to store website files, Amazon Route 53 for domain management, AWS Certificate Manager to secure your site with HTTPS, and Amazon CloudFront for global content distribution. Designed for beginners, it offers a cost-effective and straightforward way to deploy your resume online. 
 
-# Part 2 : deploying a Web-Based Resume: Automated Azure and Terraform Method
+** Part 2 : deploying a Web-Based Resume: Automated Azure and Terraform Method
 
-* This approach demonstrates how to deploy an online resume in an automated fashion using Azure services configured through Terraform. It utilizes Azure's Storage Account for storing content, CDN for fast global delivery, and DNS services for domain management, ensuring your resume is accessible and secure. The automation is powered by Terraform, facilitating an efficient, scalable, and error-minimizing deployment process. This method suits those looking for a hands-off, performance-optimized hosting solution for their web-based resume
+ This approach demonstrates how to deploy an online resume in an automated fashion using Azure services configured through Terraform. It utilizes Azure's Storage Account for storing content, CDN for fast global delivery, and DNS services for domain management, ensuring your resume is accessible and secure. The automation is powered by Terraform, facilitating an efficient, scalable, and error-minimizing deployment process. This method suits those looking for a hands-off, performance-optimized hosting solution for their web-based resume
 
-* Terraform Azure Resources Project
+*** Terraform Azure Resources Project
 
 This Terraform project automates the deployment of Azure resources, including resource groups, storage accounts, and CDN profiles and endpoints. To ensure security and flexibility, sensitive information such as the storage account name and resource group name is configured through environment variables.
 
-** Prerequisites
+*** Prerequisites
 
 - Terraform installed on your local machine.
 - Azure CLI installed and configured with your Azure account credentials.
 - An understanding of environment variables and their use in providing sensitive data to Terraform.
 
-** Setup
+*** Setup
 
 Before you can apply the Terraform configuration, you need to set up environment variables for any sensitive or environment-specific information required by the project.
 
-*** Exporting Environment Variables
+**** Exporting Environment Variables
 
-**** For Linux/macOS:
+***** For Linux/macOS:
 
 Open your terminal and set the environment variables using the =export= command. Replace =<value>= with the actual values you wish to set.
 
