@@ -30,10 +30,12 @@ Before you can apply the Terraform configuration, you need to set up environment
 Open your terminal and set the environment variables using the =export= command. Replace =<value>= with the actual values you wish to set.
 
 #+begin_src bash
+
 export TF_VAR_storage_account_name="<uniqueStorageAccountName>"
 export TF_VAR_resource_group_name="<yourResourceGroupName>"
 export TF_VAR_cdn_profile_name="<yourCDNProfileName>"
 export TF_VAR_cdn_endpoint_name="<yourCDNEndpointName>"
+
 #+end_src
 
 **** For Windows Command Prompt:
@@ -41,10 +43,12 @@ export TF_VAR_cdn_endpoint_name="<yourCDNEndpointName>"
 Use the =set= command to define your environment variables. Ensure to replace =<value>= with your specific configuration values.
 
 #+begin_src cmd
+
 set TF_VAR_storage_account_name=<uniqueStorageAccountName>
 set TF_VAR_resource_group_name=<yourResourceGroupName>
 set TF_VAR_cdn_profile_name=<yourCDNProfileName>
 set TF_VAR_cdn_endpoint_name=<yourCDNEndpointName>
+
 #+end_src
 
 **** For Windows PowerShell:
@@ -52,10 +56,12 @@ set TF_VAR_cdn_endpoint_name=<yourCDNEndpointName>
 In PowerShell, environment variables can be set using the =$env:= prefix. Replace =<value>= with your actual data.
 
 #+begin_src powershell
+
 $env:TF_VAR_storage_account_name="<uniqueStorageAccountName>"
 $env:TF_VAR_resource_group_name="<yourResourceGroupName>"
 $env:TF_VAR_cdn_profile_name="<yourCDNProfileName>"
 $env:TF_VAR_cdn_endpoint_name="<yourCDNEndpointName>"
+
 #+end_src
 
 ** Running Terraform
@@ -65,19 +71,25 @@ With the environment variables set, you can proceed with the Terraform workflow.
 1. Initialize the Terraform project:
 
    #+begin_src bash
+
    terraform init
+
    #+end_src
 
 2. Create a Terraform execution plan:
 
    #+begin_src bash
+
    terraform plan
+
    #+end_src
 
 3. Apply the Terraform configuration to deploy the Azure resources:
 
    #+begin_src bash
+
    terraform apply
+
    #+end_src
 
 ** Notes
@@ -90,7 +102,9 @@ With the environment variables set, you can proceed with the Terraform workflow.
 To remove the deployed resources, you can run the following command:
 
 #+begin_src bash
+
 terraform destroy
+
 #+end_src
 
 Ensure that you really want to remove the resources before running this command, as it will delete all the infrastructure created by Terraform in your Azure account.

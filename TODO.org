@@ -1,0 +1,11 @@
+#+title: Terraform Progression
+
+*** TODO **Step0:** Do manual work here
+
+*** TODO **Step1:** Do Terraform HCL with hardcoded values here
+
+*** TODO **Step2:** Do Terraform HCL with injected values here
+
+*** TODO **Step3:** Do Terraform HCL with multiple provider modules here
+
+*** TODO **Step4:** Do Terraform CDK conversion of HCL from step3 here
