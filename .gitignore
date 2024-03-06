@@ -1,4 +1,8 @@
+# Project
+
 *.tfstate
 *.tfstate.*
 *.tfvars
 .terraform/
+.terraform.lock.hcl
+.envrc
