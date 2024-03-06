@@ -1,0 +1,111 @@
+# resume_for_Static_Website
+
+# Part 1 : deploying a Web-Based Resume: Manual AWS Method
+
+* Deploying a Web-Based Resume: Manual AWS Method
+This method guides you through manually creating and deploying a personal resume website using basic web technologies. It leverages HTML, CSS, and JavaScript for site construction and AWS services for hosting and distribution. The process involves using Amazon S3 to store website files, Amazon Route 53 for domain management, AWS Certificate Manager to secure your site with HTTPS, and Amazon CloudFront for global content distribution. Designed for beginners, it offers a cost-effective and straightforward way to deploy your resume online. 
+
+# Part 2 : deploying a Web-Based Resume: Automated Azure and Terraform Method
+
+* This approach demonstrates how to deploy an online resume in an automated fashion using Azure services configured through Terraform. It utilizes Azure's Storage Account for storing content, CDN for fast global delivery, and DNS services for domain management, ensuring your resume is accessible and secure. The automation is powered by Terraform, facilitating an efficient, scalable, and error-minimizing deployment process. This method suits those looking for a hands-off, performance-optimized hosting solution for their web-based resume
+
+* Terraform Azure Resources Project
+
+This Terraform project automates the deployment of Azure resources, including resource groups, storage accounts, and CDN profiles and endpoints. To ensure security and flexibility, sensitive information such as the storage account name and resource group name is configured through environment variables.
+
+** Prerequisites
+
+- Terraform installed on your local machine.
+- Azure CLI installed and configured with your Azure account credentials.
+- An understanding of environment variables and their use in providing sensitive data to Terraform.
+
+** Setup
+
+Before you can apply the Terraform configuration, you need to set up environment variables for any sensitive or environment-specific information required by the project.
+
+*** Exporting Environment Variables
+
+**** For Linux/macOS:
+
+Open your terminal and set the environment variables using the =export= command. Replace =<value>= with the actual values you wish to set.
+
+#+begin_src bash
+
+export TF_VAR_storage_account_name="<uniqueStorageAccountName>"
+export TF_VAR_resource_group_name="<yourResourceGroupName>"
+export TF_VAR_cdn_profile_name="<yourCDNProfileName>"
+export TF_VAR_cdn_endpoint_name="<yourCDNEndpointName>"
+
+#+end_src
+
+**** For Windows Command Prompt:
+
+Use the =set= command to define your environment variables. Ensure to replace =<value>= with your specific configuration values.
+
+#+begin_src cmd
+
+set TF_VAR_storage_account_name=<uniqueStorageAccountName>
+set TF_VAR_resource_group_name=<yourResourceGroupName>
+set TF_VAR_cdn_profile_name=<yourCDNProfileName>
+set TF_VAR_cdn_endpoint_name=<yourCDNEndpointName>
+
+#+end_src
+
+**** For Windows PowerShell:
+
+In PowerShell, environment variables can be set using the =$env:= prefix. Replace =<value>= with your actual data.
+
+#+begin_src powershell
+
+$env:TF_VAR_storage_account_name="<uniqueStorageAccountName>"
+$env:TF_VAR_resource_group_name="<yourResourceGroupName>"
+$env:TF_VAR_cdn_profile_name="<yourCDNProfileName>"
+$env:TF_VAR_cdn_endpoint_name="<yourCDNEndpointName>"
+
+#+end_src
+
+** Running Terraform
+
+With the environment variables set, you can proceed with the Terraform workflow. Run the following commands in your terminal or command prompt:
+
+1. Initialize the Terraform project:
+
+   #+begin_src bash
+
+   terraform init
+
+   #+end_src
+
+2. Create a Terraform execution plan:
+
+   #+begin_src bash
+
+   terraform plan
+
+   #+end_src
+
+3. Apply the Terraform configuration to deploy the Azure resources:
+
+   #+begin_src bash
+
+   terraform apply
+
+   #+end_src
+
+** Notes
+
+- It's crucial to ensure that the environment variables are correctly set before running Terraform commands to avoid any misconfiguration or deployment errors.
+- Remember to review the Terraform plan output carefully before applying the configuration to understand the changes that will be made to your infrastructure.
+
+** Cleanup
+
+To remove the deployed resources, you can run the following command:
+
+#+begin_src bash
+
+terraform destroy
+
+#+end_src
+
+Ensure that you really want to remove the resources before running this command, as it will delete all the infrastructure created by Terraform in your Azure account.
+

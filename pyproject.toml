@@ -1,0 +1,19 @@
+[project]
+name = "achille-resume-static-website"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "chiefkemist", email = "chiefkemist+git@outcastgeek.tech" }
+]
+dependencies = [
+    "cdktf>=0.20.4",
+    "cdktf-cdktf-provider-aws>=19.8.1",
+    "cdktf-cdktf-provider-google>=13.8.0",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[tool.rye]
+managed = true
+virtual = true
+dev-dependencies = []
