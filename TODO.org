@@ -6,6 +6,22 @@
 
 *** TODO **Step2:** Do Terraform HCL with injected values here
 
+Refer to:
+- [[https://12factor.net/][Twelve-Factor App]]
+- [[https://developer.hashicorp.com/terraform/language/values/variables#variables-on-the-command-line][Terraform Input Variables]]
+
 *** TODO **Step3:** Do Terraform HCL with multiple provider modules here
 
 *** TODO **Step4:** Do Terraform CDK conversion of HCL from step3 here
+
+Refer to:
+
+- [[https://developer.hashicorp.com/terraform/cdktf][Terraform CDK]]
+- [[https://rye-up.com/][Python Rye]]
+- [[https://astral.sh/blog/uv][Python uv]]
+
+#+begin_src bash
+
+curl -sSf https://rye-up.com/get | bash
+
+#+end_src
