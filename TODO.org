@@ -4,6 +4,18 @@
 
 *** TODO **Step1:** Do Terraform HCL with hardcoded values here
 
+Refer to:
+
+#+begin_src terraform
+
+resource "null_resource" "update_source_files" {
+    provisioner "local-exec" {
+        command     = "aws s3 sync app/ s3://my-s3-bucket"
+    }
+}
+
+#+end_src
+
 *** TODO **Step2:** Do Terraform HCL with injected values here
 
 Refer to:
