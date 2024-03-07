@@ -1,6 +1,5 @@
 variable "location" {
   description = "The Azure region where resources will be created."
-  default     = "eastus"
 }
 
 variable "storage_account_name" {

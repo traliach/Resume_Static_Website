@@ -1,3 +1,59 @@
 #+title: Terraform with Injected Values
+** Step 1: Structure Your Terraform Configuration
+Ensure your Terraform configuration is organized into files as follows:
+- =provider.tf=: Contains the Terraform provider configuration.
+- =variables.tf=: Declares variables without default values for sensitive or environment-specific configurations.
+- =main.tf=: Contains the resource definitions.
+- =secret.tfvars=: (Not to be committed) Contains sensitive variable values.
+- =.gitignore=: Updated to include =*.tfstate=, =*.tfvars=, and =.terraform/= to prevent committing sensitive or generated files.
 
+** Step 2: Initialize Terraform
+Navigate to your Terraform configuration directory and run:
+#+BEGIN_SRC sh
+terraform init
+#+END_SRC
+This command initializes the Terraform working directory, installs the required provider versions, and prepares the local environment for other Terraform commands.
+
+** Step 3: Create a Secret Variables File
+Create a =secret.tfvars= file (ensure this file is listed in =.gitignore=) and populate it with sensitive information:
+#+BEGIN_SRC
+# secret.tfvars example
+location = "East US"
+storage_account_name = "uniqueaccountname123"
+resource_group_name = "MyResourceGroup"
+cdn_profile_name = "MyCDNProfile"
+cdn_endpoint_name = "MyCDNEndpoint"
+#+END_SRC
+
+** Step 4: Plan Infrastructure Changes
+Generate and review an execution plan to see what actions Terraform will take to change the infrastructure:
+#+BEGIN_SRC sh
+terraform plan -var-file="secret.tfvars"
+#+END_SRC
+Review the output carefully to ensure it matches your expectations.
+
+** Step 5: Apply Infrastructure Changes
+Apply the changes required to reach the desired state of the configuration:
+#+BEGIN_SRC sh
+terraform apply -var-file="secret.tfvars"
+#+END_SRC
+Terraform will prompt for confirmation before applying. Review the plan one final time before confirming the action.
+
+** Optional Steps
+
+*** Viewing Current State
+To inspect the current state of your managed infrastructure:
+#+BEGIN_SRC sh
+terraform show
+#+END_SRC
+
+*** Destroying Infrastructure
+To remove all resources defined in your Terraform configuration:
+#+BEGIN_SRC sh
+terraform destroy -var-file="secret.tfvars"
+#+END_SRC
+This action is destructive and will prompt for confirmation. Review the resources to be destroyed carefully before confirming.
+
+** Conclusion
+Following these steps will help you manage your Azure infrastructure using Terraform in a local development environment, with a focus on security and best practices for handling sensitive data.
 *** DONE Do Terraform HCL with injected values here
