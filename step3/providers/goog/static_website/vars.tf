@@ -1,26 +1,8 @@
 
-variable "region" {
-  type        = string
-  description = "AWS region"
-  default     = "no-region"
-}
-
-variable "aws_access_key_id" {
-  type        = string
-  description = "AWS_ACCESS_KEY_ID"
-  default     = "no-aws_access_key_id"
-}
-
-variable "aws_secret_access_key" {
-  type        = string
-  description = "AWS_SECRET_ACCESS_KEY"
-  default     = "no-aws_secret_access_key"
-}
-
-# Google Cloud Terraform variables for the project and region
 variable "project_id" {
   type        = string
   description = "The ID of the Google Cloud project"
+  default = "no_project_id"
 }
 
 variable "goog_region" {
@@ -32,11 +14,23 @@ variable "goog_region" {
 variable "bucket_name" {
   type        = string
   description = "The name of the storage bucket"
-  default = "not_bucket_name"
+  default     = "no_bucket_name"
+
 }
 
 variable "bucket_location" {
   type        = string
   description = "The location of the storage bucket"
   default     = "no_bucket_location"
+}
+
+variable "website_dir" {
+  type        = string
+  description = "The directory containing the website files"
+}
+
+variable "storage_class" {
+  type        = string
+  description = "The storage class for the storage bucket"
+  default     = "STANDARD"
 }
