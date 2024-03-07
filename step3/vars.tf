@@ -16,3 +16,27 @@ variable "aws_secret_access_key" {
   description = "AWS_SECRET_ACCESS_KEY"
   default     = "no-aws_secret_access_key"
 }
+
+# Google Cloud Terraform variables for the project and region
+variable "project_id" {
+  type        = string
+  description = "The ID of the Google Cloud project"
+}
+
+variable "goog_region" {
+  type        = string
+  description = "The region where the resources will be created"
+  default     = "us-central1"
+}
+
+variable "bucket_name" {
+  type        = string
+  description = "The name of the storage bucket"
+  default = "not_bucket_name"
+}
+
+variable "bucket_location" {
+  type        = string
+  description = "The location of the storage bucket"
+  default     = "no_bucket_location"
+}
