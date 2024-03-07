@@ -56,11 +56,18 @@ Refer to:
 Refer to:
 
 - [[https://developer.hashicorp.com/terraform/cdktf][Terraform CDK]]
+- [[https://registry.terraform.io/browse/providers][Terraform Providers]]
 - [[https://rye-up.com/][Python Rye]]
 - [[https://astral.sh/blog/uv][Python uv]]
 
 #+begin_src bash
 
 curl -sSf https://rye-up.com/get | bash
+
+#+end_src
+
+#+begin_src bash
+
+cdktf init --template="python-pip" --providers="aws@~>5.39,azurerm@~>3.94,google@~>5.19"
 
 #+end_src

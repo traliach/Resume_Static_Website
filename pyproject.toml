@@ -9,11 +9,14 @@ dependencies = [
     "cdktf>=0.20.4",
     "cdktf-cdktf-provider-aws>=19.8.1",
     "cdktf-cdktf-provider-google>=13.8.0",
+    "cdktf-cdktf-provider-azurerm>=12.8.0",
 ]
-readme = "README.md"
+readme = "README.org"
 requires-python = ">= 3.8"
 
 [tool.rye]
 managed = true
 virtual = true
-dev-dependencies = []
+dev-dependencies = [
+    "pytest>=8.0.2",
+]

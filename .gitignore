@@ -1,8 +1,23 @@
 # Project
 
+
+## Terraform
 *.tfstate
 *.tfstate.*
 *.tfvars
 .terraform/
 .terraform.lock.hcl
+
+
+## CdkTF
+dist/
+imports/*
+!imports/__init__.py
+.terraform
+cdktf.out
+cdktf.log
+*terraform.*.tfstate*
+
+# Local
 .envrc
+.DS_Store
