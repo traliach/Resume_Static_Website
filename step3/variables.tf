@@ -13,9 +13,11 @@ variable "region" {
 variable "bucket_name" {
   type        = string
   description = "The name of the storage bucket"
+  default = "not_bucket_name"
 }
 
 variable "bucket_location" {
   type        = string
   description = "The location of the storage bucket"
+  default     = "no_bucket_location"
 }
