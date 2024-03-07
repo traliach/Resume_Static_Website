@@ -1,4 +1,4 @@
-* Build and Deploy Your Resume Website Using HTML, CSS, JavaScript, and AWS
+* Build and Deploy Your Resume Website Using HTML, CSS, JavaScript, on AWS
 
 ** Step 1: Build Your Resume Website
    :PROPERTIES:
@@ -43,3 +43,72 @@
 * Notes
   - This guide assumes basic knowledge of AWS services and web development.
   - Ensure compliance with AWS pricing and policies.
+
+**OPTIONAL
+* Automate Deployment to AWS S3 and Invalidate CloudFront with GitHub Actions
+
+** Introduction
+This guide helps you automate the deployment of your resume website to AWS S3 and invalidate its CloudFront distribution using GitHub Actions. It's like setting up a magic button that automatically updates your website on AWS whenever you make changes to your website's code on GitHub.
+
+** Prerequisites
+- Your website's code is on GitHub.
+- You have an AWS account with an S3 bucket and CloudFront distribution set up.
+- You've created AWS Access Key ID and Secret Access Key for a user with permissions to access S3 and CloudFront.
+
+** Step 1: Store AWS Credentials in GitHub Secrets
+- Go to your GitHub repository's settings.
+- Navigate to the "Secrets" section.
+- Click on "New repository secret."
+- Add your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as secrets.
+
+** Step 2: Create a GitHub Actions Workflow
+- In your repository, create a `.github/workflows` folder if it doesn't exist.
+- Create a new YAML file inside this folder, e.g., `deploy-to-aws.yml`. This file will contain your deployment instructions.
+
+** Step 3: Define Your Workflow
+Below is a simplified workflow definition that you can customize for your project. Save this in your `deploy-to-aws.yml` file.
+
+#+BEGIN_SRC yaml
+name: Deploy to AWS S3 and Invalidate CloudFront
+
+on:
+  push:
+    branches:
+      - main  # Replace with your branch name if different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        # This step checks out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+
+      # Add steps here if your site needs building (e.g., Jekyll, Hugo)
+
+      - name: Deploy to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: your-bucket-name
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'your-bucket-region'  
+          SOURCE_DIR: 'path-to-your-website-files'
+
+      - name: Invalidate CloudFront Distribution
+        uses: chetan/invalidate-cloudfront-action@v1
+        env:
+          DISTRIBUTION: your-distribution-id
+          PATHS: '/*'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'your-cloudfront-distribution-region'
+#+END_SRC
+
+** Step 4: Commit and Push Your Changes
+- Once you've added and customized the `deploy-to-aws.yml` file, commit and push it to your repository.
+- GitHub Actions will automatically execute the workflow you defined whenever you push changes to the specified branch.
+
+** Conclusion
+Congratulations! You've set up a GitHub Actions workflow to automatically deploy your resume website to AWS S3 and invalidate its CloudFront distribution. Now, every time you push updates to your code, your website will be updated on AWS without manual intervention.
