@@ -71,3 +71,22 @@ curl -sSf https://rye-up.com/get | bash
 cdktf init --template="python-pip" --providers="aws@~>5.39,azurerm@~>3.94,google@~>5.19"
 
 #+end_src
+
+#+begin_src bash
+
+source `pwd`/.venv/bin/activate # activate the Rye based Python environment
+
+#+end_src
+
+
+#+begin_src bash
+
+cd step4 # navigate to step4
+
+cdktf plan # execute the Terraform CDK plan
+
+cdktf deploy # proceed with the deployment of the resources defined with the Terraform CDK
+
+cdktf destrpy # destroy all the resources
+
+#+end_src
