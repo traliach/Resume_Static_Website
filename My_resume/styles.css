@@ -1,4 +1,4 @@
-/* General Styles */
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,12 +6,17 @@
 }
 
 body, html {
-    font-family: 'Helvetica', 'Verdana', sans-serif;
+    font-family: 'Helvetica', 'Arial', sans-serif;
     background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+    font-size: 18px;
+    padding: 20px;
     margin-left: 2em;
     margin-top: 1em;
 }
 
+/* Top Section */
 .top-section {
     display: flex;
     justify-content: start;
@@ -24,98 +29,115 @@ body, html {
     margin-right: 2em;
 }
 
-.contact-info {
-    flex: 1;
-    text-align: left;
-}
-
 .resume-headshot {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: 2px solid #007bff; /* Blue border for headshot */
+    border: 3px solid #007bff;
     object-fit: cover;
 }
 
+.contact-info h1 {
+    margin-bottom: 0.5em;
+}
+
+.contact-info .contact-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.contact-icon img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* Resume Sections */
 .resume-section {
     margin-bottom: 2em;
-    padding: 1em;
-    border-radius: 5px;
-    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.2);
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .resume-section h2 {
-    background-color: #007bff; /* Blue background for section headers */
-    color: white;
-    padding: 5px 10px;
-    display: inline-block;
-    font-size: 1.2em;
-    margin-bottom: .5em;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
 }
 
-ul {
-    padding-left: 20px;
-    list-style-type: none;
+ul, ol {
+    margin-left: 20px;
+    padding-left: 15px;
 }
 
 li {
-    margin-bottom: .5em;
-    line-height: 1.4;
-    font-weight: 400;
+    margin-bottom: 10px;
 }
 
-.timeline-content p {
-    font-style: italic;
-    margin-top: 0.5em;
-    color: #555;
-    transition: all 0.3s ease-in-out; /* Transition for smooth toggling of description */
-}
-
-/* Timeline Styles */
+/* Timeline Styles for Employment and Projects */
 .timeline {
-    border-left: 3px solid #007bff; /* Blue timeline border */
-    padding-left: 20px;
-    margin-left: 20px;
     position: relative;
+    padding-left: 40px;
+    list-style: none;
+}
+
+.timeline:before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #007bff;
 }
 
 .timeline-entry {
-    margin-top: 1em;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    margin-bottom: 20px;
 }
 
-.timeline-dot {
-    width: 10px;
-    height: 10px;
-    background-color: #007bff; /* Blue dot color */
-    border-radius: 50%;
+.timeline-entry:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-entry:before {
+    content: '';
+    display: block;
     position: absolute;
-    left: -6px;
+    left: 11px;
     top: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #007bff;
 }
 
-.timeline-content h3,
-.timeline-content p {
-    margin: 5px 0;
-    color: #333;
-}
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .top-section {
+        flex-direction: column;
+        align-items: center;
+    }
 
-/* Hidden by default, shown on click */
-.hidden {
-    display: none;
-}
+    .headshot-container {
+        margin-bottom: 20px;
+    }
 
-/* LinkedIn Icon Style */
-.linkedin-icon img {
-    display: inline-block;
-    width: 30px; /* Adjusted size */
-    height: 30px;
-    margin: 5px;
+    .contact-info h1 {
+        text-align: center;
+    }
+
+    .contact-icons {
+        justify-content: center;
+    }
+
+    .contact-icon img {
+        width: 20px;
+        height: 20px;
+    }
 }
-/* Github Icon Style */
-.github-icon img {
-    display: inline-block;
-    width: 30px; /* Adjusted size */
-    height: 30px;
-    margin: 5px;
