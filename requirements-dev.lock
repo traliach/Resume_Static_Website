@@ -19,6 +19,8 @@ cdktf==0.20.4
 cdktf-cdktf-provider-aws==19.8.1
 cdktf-cdktf-provider-azurerm==12.8.0
 cdktf-cdktf-provider-google==13.8.0
+colorama==0.4.6
+    # via pytest
 constructs==10.3.0
     # via cdktf
     # via cdktf-cdktf-provider-aws
