@@ -33,20 +33,21 @@ module "my_resume_resources" {
   project_id            = var.project_id
 }
 
-output "bucket_name" {
-  value = module.my_resume_resources.bucket_name
-}
-
+# uncomment to deploy to aws
 # output "s3_bucket_website_url" {
 #   value = module.my_resume_resources.s3_website_url
 # }
 
-# google
+#-------Google output variables
 output "goog_bucket_website_url" {
   value = module.my_resume_resources.url
 }
 
 output "https_url" {
   value = module.my_resume_resources.cloud_storage_website_url
+}
+
+output "bucket_name" {
+  value = module.my_resume_resources.bucket_name
 }
 

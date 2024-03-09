@@ -6,3 +6,10 @@ region = "your region"
 aws_access_key_id     = "your access key id"
 aws_secret_access_key = "your secret access key"
 
+//To Deploy on Google
+project_id = "Your google project ID"
+region  = "your region"
+bucket_name = "your given bucket name"
+bucket_location = "location of the bucket US, EU etc.."
+
+
