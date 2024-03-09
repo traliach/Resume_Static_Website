@@ -1,0 +1,164 @@
+#+author: Ali Achille Traore
+#+title: From Static Website Deployment on AWS to Advanced Infrastructure as Code with Terraform
+#+date: <2024-02-25 Sun>
+
+* Introduction
+This document navigates through deploying static websites from manual deployment on AWS, to automated Terraform deployment on Azure, and advances into Infrastructure as Code practices with Terraform, including the Terraform Cloud Development Kit (CDKTF).
+
+* Part 1: Build and Deploy a Web-Based Resume Using AWS
+** Step 0: Manual work
+Deploy a simple resume website using AWS services such as S3, Route 53, AWS Certificate Manager, and CloudFront. This beginner-friendly and cost-effective approach demonstrates the basics of cloud deployment.
+
+** Prerequisites
+- GitHub account for version control.
+- Visual Studio Code or preferred code editor.
+- AWS account.
+- Git installed on the local machine.
+
+** Deployment Steps
+1. Build Your Resume with HTML, CSS, and JavaScript.
+2. Upload to AWS S3 and Configure for Static Website Hosting.
+3. Use Route 53 for a Custom Domain.
+4. Set Up SSL/TLS with AWS Certificate Manager.
+5. Create a CloudFront Distribution.
+- Optionally, integrate with GitHub for Continuous Deployment.
+
+** Conclusion
+- Pros: Beginner-friendly, cost-effective, customizable.
+- Cons: Manual process, AWS-specific, requires regular maintenance.
+
+* Part 2: Azure Online Resume Deployment with Terraform
+** Step 1: Terraform HCL with hardcoded values
+Deploy an online resume on Azure using Terraform, utilizing Azure's Storage Account, CDN, and DNS for global distribution.
+
+** Prerequisites
+- Azure account with an active subscription.
+- Terraform installed on the local machine.
+- Basic knowledge of Terraform and Azure services.
+- Azure CLI installed.
+- Git installed on the local machine.
+
+** Deployment Steps
+Setup provider configuration, variables, and resources like Resource Group, Storage Account, CDN Profile, and CDN Endpoint.
+Refer to Twelve-Factor App principles and Terraform Input Variables for dynamic configurations.
+
+*** Provider Configuration
+#+BEGIN_SRC terraform
+provider "azurerm" {
+  features {}
+}
+#+END_SRC
+
+*** Variables Definition and Local Values
+#+BEGIN_SRC terraform
+variable "location" {
+  description = "The Azure region where resources will be created."
+  default     = "East US"
+}
+
+variable "storage_account_name" {
+  description = "The name of the storage account for hosting the resume site."
+  default     = "achilledevopsdemo123" # Ensure this is unique
+}
+
+variable "resource_group_name" {
+  description = "The name of the resource group."
+  default     = "AchilleDevOpsDemoRG"
+}
+
+variable "cdn_profile_name" {
+  description = "The name of the CDN profile."
+  default     = "AchilleDevOpsCDNProfile"
+}
+
+variable "cdn_endpoint_name" {
+  description = "The name of the CDN endpoint."
+  default     = "AchilleDevOpsCDNEndpoint"
+}
+#+END_SRC
+
+*** Resource Group
+#+BEGIN_SRC terraform
+resource "azurerm_resource_group" "rg" {
+  name     = var.resource_group_name
+  location = var.location
+}
+#+END_SRC
+
+*** Storage Account
+#+BEGIN_SRC terraform
+resource "azurerm_storage_account" "resume" {
+  name                     = var.storage_account_name
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = var.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  static_website {
+    index_document = "index.html"
+  }
+}
+#+END_SRC
+
+*** CDN Profile and Endpoint
+#+BEGIN_SRC terraform
+resource "azurerm_cdn_profile" "resume_cdn_profile" {
+  name                = var.cdn_profile_name
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  sku                 = "Standard_Microsoft"
+}
+
+resource "azurerm_cdn_endpoint" "resume_cdn_endpoint" {
+  name                = var.cdn_endpoint_name
+  profile_name        = azurerm_cdn_profile.resume_cdn_profile.name
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  origin {
+    name      = "resumeOrigin"
+    host_name = local.storage_account_hostname
+  }
+}
+#+END_SRC
+
+** Outputs
+*** Website URL and CDN Endpoint Hostname
+#+BEGIN_SRC terraform
+output "static_website_url" {
+  value = azurerm_storage_account.resume.primary_web_endpoint
+}
+output "cdn_endpoint_hostname" {
+  value = azurerm_cdn_endpoint.resume_cdn_endpoint.host_name
+}
+#+END_SRC
+
+** Pros and Cons of Using Terraform
+- Pros: Infrastructure as Code, provider agnostic, state management, modular design.
+- Cons: Learning curve, complexity in state management, performance issues for large infrastructures.
+
+* Part 3: Terraform Progression
+Advanced Terraform usage, from manual work to utilizing Terraform CDK for infrastructure management.
+
+#+BEGIN_SRC terraform
+resource "null_resource" "update_source_files" {
+    provisioner "local-exec" {
+        command = "aws s3 sync app/ s3://my-s3-bucket"
+    }
+}
+#+END_SRC
+
+** Step 4: Terraform CDK conversion
+Introduction to Terraform CDK, setup, and commands for managing resources with CDKTF.
+
+* CDKTF Setup on Windows
+** Preparation and Initialization
+** Activate Python Virtual Environment
+** Execute CDKTF Commands
+
+* Repository of Resources for Further Learning
+Provides comprehensive links and resources for AWS, Azure, Terraform, Git, GitHub, GitLab, HTML, and CSS.
+
+* HTML and CSS Resources for Better Web Development
+Highlights tutorials, courses, and books for learning HTML and CSS.
+
+* Conclusion
+From deploying a static website on AWS to adopting advanced Infrastructure as Code practices with Terraform and Terraform CDK, this guide equips developers with the knowledge to manage and scale cloud infrastructure efficiently.
