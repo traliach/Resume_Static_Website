@@ -15,7 +15,10 @@ body, html {
     margin-left: 2em;
     margin-top: 1em;
 }
-
+/* Add the hidden class rule here */
+.hidden {
+    display: none;
+}
 /* Top Section */
 .top-section {
     display: flex;
