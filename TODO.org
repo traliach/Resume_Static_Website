@@ -90,3 +90,42 @@ cdktf deploy # proceed with the deployment of the resources defined with the Ter
 cdktf destrpy # destroy all the resources
 
 #+end_src
+
+
+* CDKTF Windows Setup
+** Preparation
+   #+BEGIN_SRC sh
+   # Ensure you're in the correct starting directory (modify as needed)
+   Set-Location "path\\to\\your\\directory"
+   #+END_SRC
+
+** Initialize CDKTF Project
+   #+BEGIN_SRC sh
+   cdktf init --template="python-pip" --providers="aws@~>5.39,azurerm@~>3.94,google@~>5.19"
+   #+END_SRC
+
+** Activate the Python Virtual Environment
+   #+BEGIN_SRC sh
+   .venv\\Scripts\\Activate.ps1
+   #+END_SRC
+
+** Navigate to the step4 Directory
+   #+BEGIN_SRC sh
+   cd step4
+   #+END_SRC
+
+** Execute the Terraform CDK Plan
+   #+BEGIN_SRC sh
+   cdktf plan
+   #+END_SRC
+
+** Proceed with the Deployment
+   #+BEGIN_SRC sh
+   cdktf deploy
+   #+END_SRC
+
+* Cleanup (Optional)
+** Destroy All the Resources (When Needed)
+   #+BEGIN_SRC sh
+   # cdktf destroy
+   #+END_SRC
