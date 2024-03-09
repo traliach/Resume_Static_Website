@@ -35,7 +35,7 @@ def upload_files(stack, folder_path: str, bucket: StorageBucket):
 
 def google_provide_bucket(stack, id, project):
     # Configure the Google provider
-    GoogleProvider(stack, 'google', project='ogtech', region='us-central1')
+    GoogleProvider(stack, 'google', project=project, region='us-central1')
 
     # Create the storage bucket for the static website
     bucket = StorageBucket(

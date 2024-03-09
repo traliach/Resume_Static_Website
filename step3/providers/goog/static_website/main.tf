@@ -4,6 +4,7 @@ provider "google" {
   region  = var.goog_region
 }
 
+# variables needed to figure out the content type of the files
 locals {
   file_extensions = {
     ".css"  = "text/css",
@@ -48,21 +49,6 @@ resource "google_storage_bucket_object" "upload_file" {
   // Optional: Set the storage class of the object
   storage_class = "STANDARD"
 
-  # content_type = lookup(
-  #   {
-  #     ".css"  = "text/css",
-  #     ".html" = "text/html",
-  #     ".js"   = "application/javascript",
-  #     ".json" = "application/json",
-  #     ".png"  = "image/png",
-  #     ".svg"  = "image/svg+xml",
-  #     ".xml"  = "application/xml",
-  #     ".jpeg" = "image/jpeg",
-  #     ".jpg"  = "image/jpeg",
-  #   },
-  #   substr(each.value, length(each.value) - 4, 5),
-  #   "application/octet-stream"
-  # )
   content_type = lookup(
   local.file_extensions,
   regex("\\.\\w+$", each.value),
