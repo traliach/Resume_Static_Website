@@ -1,116 +1,303 @@
+#+author: Ali Achille Traore
+#+title: Static Website Deployment: Manual to Automated with Terraform
+#+date: <2024-02-25 Sun>
 
-* achille-resume-static-website
+* Build and Deploy a Web-Based Resume Using AWS
+  This guide provides a comprehensive walkthrough on creating and deploying a simple resume using HTML, CSS, JavaScript, and AWS services, including [[https://aws.amazon.com/s3/][S3]], [[https://aws.amazon.com/route53/][Route 53]], [[https://aws.amazon.com/certificate-manager/][AWS Certificate Manager]], and [[https://aws.amazon.com/cloudfront/][CloudFront]]. This approach is manual, making it beginner-friendly, cost-effective (free for certain tiers and usage levels), and straightforward to deploy. However, it's important to note that it might be easy to overlook some steps, and the process is not directly transferable to other cloud providers.
 
-*** TODO Add a meaningful description here
+** Prerequisites
+   Before you start, ensure you have the following:
+   - A GitHub account: Used for version control and to automate the deployment process with GitHub Actions.
+   - Visual Studio Code (VS Code) or any preferred code editor: For writing and editing your HTML, CSS, and JavaScript files.
+   - An AWS account: To access AWS services such as [[https://aws.amazon.com/s3/][S3]], [[https://aws.amazon.com/route53/][Route 53]], [[https://aws.amazon.com/certificate-manager/][AWS Certificate Manager]], and [[https://aws.amazon.com/cloudfront/][CloudFront]] for hosting and deploying your resume.
+   - Git installed on your local machine: For version control and to automate deployment processes.
 
-* resume_for_Static_Website
+** Git Setup Steps
+   - Initialize a Git repository in your project directory.
+   - Connect your local repository to GitHub.
+   - Commit your project files and push them to GitHub.
 
-** Part 1 : deploying a Web-Based Resume: Manual AWS Method
 
-*** Deploying a Web-Based Resume: Manual AWS Method
-This method guides you through manually creating and deploying a personal resume website using basic web technologies. It leverages HTML, CSS, and JavaScript for site construction and AWS services for hosting and distribution. The process involves using Amazon S3 to store website files, Amazon Route 53 for domain management, AWS Certificate Manager to secure your site with HTTPS, and Amazon CloudFront for global content distribution. Designed for beginners, it offers a cost-effective and straightforward way to deploy your resume online. 
+** Pros and Cons
+   Understanding the advantages and disadvantages of deploying a web-based resume on AWS manually can help you make an informed decision.
 
-** Part 2 : deploying a Web-Based Resume: Automated Azure and Terraform Method
+*** Pros
+    - Beginner-friendly: The process is designed to be easy to follow for those new to web development and cloud services.
+    - Cost-effective: Utilizing AWS's free tier for certain services and usage levels can significantly reduce or even eliminate hosting costs.
+    - Customizable: Full control over the deployment process allows for customization and optimization according to specific needs.
 
- This approach demonstrates how to deploy an online resume in an automated fashion using Azure services configured through Terraform. It utilizes Azure's Storage Account for storing content, CDN for fast global delivery, and DNS services for domain management, ensuring your resume is accessible and secure. The automation is powered by Terraform, facilitating an efficient, scalable, and error-minimizing deployment process. This method suits those looking for a hands-off, performance-optimized hosting solution for their web-based resume
+*** Cons
+    - Manual process: Each step requires manual action, which can be time-consuming and may lead to mistakes if not done carefully.
+    - AWS-specific: The knowledge and setup are tailored to AWS, which may not directly transfer to other cloud platforms.
+    - Maintenance: Requires regular monitoring of AWS resources to avoid unexpected charges and to manage any necessary updates or configurations.
 
-*** Terraform Azure Resources Project
+** Step 1: Build Your Resume with HTML, CSS, and JavaScript
+   - HTML: Start by creating an =index.html= file for the structure of your resume. Use semantic tags like <header>, <section>, and <footer>.
+   - CSS: Style your resume by linking a =styles.css= file in your HTML. Focus on layout, typography, and color schemes.
+   - JavaScript: Enhance interactivity with a =script.js= file. Implement features like a light/dark mode toggle or dynamic content loading.
 
-This Terraform project automates the deployment of Azure resources, including resource groups, storage accounts, and CDN profiles and endpoints. To ensure security and flexibility, sensitive information such as the storage account name and resource group name is configured through environment variables.
+** Step 2: Upload to AWS S3 and Configure for Static Website Hosting
+   - Create an S3 Bucket: Ensure the bucket name is unique. Disable 'Block all public access' settings.
+   - Upload Files: Upload your HTML, CSS, and JavaScript files to the bucket.
+   - Static Website Hosting: Enable this feature in the bucket properties. Set =index.html= as both the index and error document.
+   - Bucket Policy: Allow public read access to your bucket contents with the correct policy.
 
-*** Prerequisites
+** Step 3: Use Route 53 for a Custom Domain
+   - Register/Transfer Domain: Use Route 53 to manage your domain, either by registering a new one or updating DNS settings for an existing domain.
+   - Create Hosted Zone: This generates DNS records for your domain.
+   - Update DNS Records: Link your S3 bucket to your domain by creating a new record set.
 
-- Terraform installed on your local machine.
-- Azure CLI installed and configured with your Azure account credentials.
-- An understanding of environment variables and their use in providing sensitive data to Terraform.
+** Step 4: Set Up SSL/TLS with AWS Certificate Manager
+   - Request a Certificate: Verify domain ownership through AWS Certificate Manager.
+   - ACM Certificate: Attach the verified certificate to your AWS resources for secure connections.
 
-*** Setup
+** Step 5: Create a CloudFront Distribution
+   - Create Distribution: Select your S3 bucket as the origin. Configure SSL/TLS with your ACM certificate.
+   - Custom Domain: Use your domain by specifying it in the "Alternate Domain Names (CNAMEs)" field.
+   - Deployment: Your site will be accessible globally through CloudFront once the distribution is deployed.
 
-Before you can apply the Terraform configuration, you need to set up environment variables for any sensitive or environment-specific information required by the project.
+#+begin_optional
+** Step 6: Integrate with GitHub for Continuous Deployment (Optional)
+   Continuous Deployment with GitHub is a strategy where every change made to your codebase is automatically deployed to your production environment, ensuring your website or application is frequently and reliably updated without manual intervention.
+   
+   - Create a GitHub Repository: Sign up or log in to GitHub, create a new repository, and organize your project files.
+   - Prepare Your Project for GitHub: Initialize a Git repository in your project directory, connect it to GitHub, and prepare your files for deployment.
+   - Set Up GitHub Actions for Automation: Use GitHub Actions to automate the deployment process. This involves creating a workflow that builds and deploys your resume to AWS S3 whenever you push new changes to your repository.
+   - Monitor Deployments: After pushing changes to GitHub, monitor the Actions tab to ensure your deployment workflow is executed successfully.
+#+end_optional
 
-**** Exporting Environment Variables
+** Conclusion
+   This manual approach to building and deploying a web-based resume on AWS is beginner-friendly, essentially free for basic use, and straightforward. However, meticulous attention to each step is crucial to avoid oversights. The process is specific to AWS, limiting its direct applicability to other cloud platforms. Monitoring AWS resources for potential charges and configuring settings for performance optimizations are advisable. The optional GitHub integration offers a way to automate deployments, enhancing efficiency and reliability.
 
-***** For Linux/macOS:
+* Azure Online Resume Deployment with Terraform
 
-Open your terminal and set the environment variables using the =export= command. Replace =<value>= with the actual values you wish to set.
+This project outlines the steps to deploy an online resume using Azure services through Terraform. It leverages Azure's Storage Account, CDN, and DNS to host and distribute static website content globally. The configuration ensures that the resume is accessible with optimal load times and security features like HTTPS.
 
-#+begin_src bash
+** Prerequisites
+Before embarking on this Terraform project, ensure you have the following:
+- An Azure account with an active subscription. Create one at https://azure.microsoft.com/en-us/free/.
+- Terraform installed on your local machine. Download from https://www.terraform.io/downloads.html.
+- Basic knowledge of Terraform and Azure services.
+- Azure CLI installed for configurations not covered by Terraform. Download from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli.
+- Git installed on your local machine: For version control and to automate deployment processes.
 
-export TF_VAR_storage_account_name="<uniqueStorageAccountName>"
-export TF_VAR_resource_group_name="<yourResourceGroupName>"
-export TF_VAR_cdn_profile_name="<yourCDNProfileName>"
-export TF_VAR_cdn_endpoint_name="<yourCDNEndpointName>"
+** Git Setup Steps
+   - Initialize a Git repository in your project directory.
+   - Connect your local repository to GitHub.
+   - Commit your project files and push them to GitHub.
 
-#+end_src
+** Setup
 
-**** For Windows Command Prompt:
+*** Provider Configuration
+#+BEGIN_SRC terraform
+provider "azurerm" {
+  features {}
+}
+#+END_SRC
 
-Use the =set= command to define your environment variables. Ensure to replace =<value>= with your specific configuration values.
+*** Variables Definition and Local Values
+#+BEGIN_SRC terraform
+variable "location" {
+  description = "The Azure region where resources will be created."
+  default     = "East US"
+}
 
-#+begin_src cmd
+variable "storage_account_name" {
+  description = "The name of the storage account for hosting the resume site."
+  default     = "achilledevopsdemo123" # Ensure this is unique
+}
 
-set TF_VAR_storage_account_name=<uniqueStorageAccountName>
-set TF_VAR_resource_group_name=<yourResourceGroupName>
-set TF_VAR_cdn_profile_name=<yourCDNProfileName>
-set TF_VAR_cdn_endpoint_name=<yourCDNEndpointName>
+variable "resource_group_name" {
+  description = "The name of the resource group."
+  default     = "AchilleDevOpsDemoRG"
+}
 
-#+end_src
+variable "cdn_profile_name" {
+  description = "The name of the CDN profile."
+  default     = "AchilleDevOpsCDNProfile"
+}
 
-**** For Windows PowerShell:
+variable "cdn_endpoint_name" {
+  description = "The name of the CDN endpoint."
+  default     = "AchilleDevOpsCDNEndpoint"
+}
 
-In PowerShell, environment variables can be set using the =$env:= prefix. Replace =<value>= with your actual data.
+locals {
+  storage_account_hostname = replace(azurerm_storage_account.resume.primary_web_endpoint, "https://", "")
+}
+#+END_SRC
 
-#+begin_src powershell
+*** Resource Group
+#+BEGIN_SRC terraform
+resource "azurerm_resource_group" "rg" {
+  name     = var.resource_group_name
+  location = var.location
+}
+#+END_SRC
 
-$env:TF_VAR_storage_account_name="<uniqueStorageAccountName>"
-$env:TF_VAR_resource_group_name="<yourResourceGroupName>"
-$env:TF_VAR_cdn_profile_name="<yourCDNProfileName>"
-$env:TF_VAR_cdn_endpoint_name="<yourCDNEndpointName>"
+*** Storage Account
+#+BEGIN_SRC terraform
+resource "azurerm_storage_account" "resume" {
+  name                     = var.storage_account_name
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = var.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
 
-#+end_src
+  static_website {
+    index_document = "index.html"
+    # Optional: error_404_document = "error.html"
+  }
+}
+#+END_SRC
 
-** Running Terraform
+*** CDN Profile
+#+BEGIN_SRC terraform
+resource "azurerm_cdn_profile" "resume_cdn_profile" {
+  name                = var.cdn_profile_name
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  sku                 = "Standard_Microsoft"
+}
+#+END_SRC
 
-With the environment variables set, you can proceed with the Terraform workflow. Run the following commands in your terminal or command prompt:
+*** CDN Endpoint
+#+BEGIN_SRC terraform
+resource "azurerm_cdn_endpoint" "resume_cdn_endpoint" {
+  name                = var.cdn_endpoint_name
+  profile_name        = azurerm_cdn_profile.resume_cdn_profile.name
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
 
-1. Initialize the Terraform project:
+  origin {
+    name      = "resumeOrigin"
+    host_name = local.storage_account_hostname
+  }
+}
+#+END_SRC
 
-   #+begin_src bash
+** Outputs
 
-   terraform init
+*** Website URL and CDN Endpoint Hostname
+#+BEGIN_SRC terraform
+output "static_website_url" {
+  value = azurerm_storage_account.resume.primary_web_endpoint
+}
 
-   #+end_src
+output "cdn_endpoint_hostname" {
+  value = azurerm_cdn_endpoint.resume_cdn_endpoint.host_name
+}
+#+END_SRC
 
-2. Create a Terraform execution plan:
+** Deployment Notes
 
-   #+begin_src bash
+1. /Custom Domain and SSL/TLS/: Additional steps are required for mapping a custom domain and enabling HTTPS, including domain verification and DNS configuration. These can be performed via the Azure portal or Azure CLI.
 
-   terraform plan
+2. /Static Website Hosting/: Ensure the Azure Storage Account's static website feature is enabled and your site content is uploaded.
 
-   #+end_src
+3. /Azure CDN/: The CDN enhances your site's load times, availability, and security.
 
-3. Apply the Terraform configuration to deploy the Azure resources:
+** Final Steps
 
-   #+begin_src bash
+- Upload your website content to the Azure Storage Account's blob service under the $web container.
+- Verify the CDN endpoint is correctly distributing your content.
+- Configure your custom domain and SSL/TLS settings as needed.
 
-   terraform apply
+** Pros and Cons of Using Terraform
 
-   #+end_src
+*** Pros
 
-** Notes
+- Infrastructure as Code
+- Provider Agnostic
+- State Management
+- Modular Design
+- Community and Ecosystem
 
-- It's crucial to ensure that the environment variables are correctly set before running Terraform commands to avoid any misconfiguration or deployment errors.
-- Remember to review the Terraform plan output carefully before applying the configuration to understand the changes that will be made to your infrastructure.
+*** Cons
 
-** Cleanup
+- Learning Curve
+- Complexity in State Management
+- Performance Issues for Large Infrastructures
+- Limited Support for Imperative Features
 
-To remove the deployed resources, you can run the following command:
+* Conclusion
 
-#+begin_src bash
+Deploying an online resume on Azure with Terraform provides a structured, efficient approach to infrastructure management, offering the flexibility to adapt to various requirements and scalability.
 
-terraform destroy
 
-#+end_src
+* Repository of Resources for Further Learning
 
-Ensure that you really want to remove the resources before running this command, as it will delete all the infrastructure created by Terraform in your Azure account.
+For more information and resources on the technologies and services mentioned in this document, please refer to the following links:
 
+- AWS (Amazon Web Services): [[https://aws.amazon.com/]]
+  - Amazon S3 (Simple Storage Service): [[https://aws.amazon.com/s3/]]
+  - Amazon Route 53: [[https://aws.amazon.com/route53/]]
+  - AWS Certificate Manager: [[https://aws.amazon.com/certificate-manager/]]
+  - Amazon CloudFront: [[https://aws.amazon.com/cloudfront/]]
+  - AWS Documentation: [[https://docs.aws.amazon.com/index.html]]
+  - AWS Getting Started Resource Center: [[https://aws.amazon.com/getting-started/]]
+
+- Azure:
+  - Microsoft Azure: [[https://azure.microsoft.com/]]
+  - Azure Storage Accounts: [[https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview]]
+  - Azure CDN (Content Delivery Network): [[https://azure.microsoft.com/en-us/services/cdn/]]
+  - Azure DNS: [[https://docs.microsoft.com/en-us/azure/dns/]]
+  - Azure Documentation: [[https://docs.microsoft.com/en-us/azure/]]
+  - Azure DevOps Solutions: [[https://azure.microsoft.com/en-us/solutions/devops/]]
+
+- Version Control and Deployment Automation:
+  - Git: [[https://git-scm.com/doc]]
+  - GitHub: [[https://github.com/]]
+  - GitHub Actions: [[https://github.com/features/actions]]
+  - GitLab: [[https://gitlab.com/]]
+  - GitLab CI/CD: [[https://docs.gitlab.com/ee/ci/]]
+
+- Terraform:
+  - Terraform by HashiCorp: [[https://www.terraform.io/]]
+  - Terraform Documentation: [[https://www.terraform.io/docs]]
+  - Terraform Azure Provider: [[https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs]]
+  - Terraform AWS Provider: [[https://registry.terraform.io/providers/hashicorp/aws/latest/docs]]
+
+- Learning Resources and Tutorials:
+  - AWS Training and Certification: [[https://aws.amazon.com/training/]]
+  - Microsoft Learn for Azure: [[https://docs.microsoft.com/en-us/learn/azure/]]
+  - Terraform Getting Started - Azure: [[https://learn.hashicorp.com/collections/terraform/azure-get-started]]
+  - Terraform Getting Started - AWS: [[https://learn.hashicorp.com/collections/terraform/aws-get-started]]
+
+These links are directed to official documentation and resources that provide extensive information on using these services and tools. Whether you are just starting out or looking to deepen your understanding of specific aspects of AWS, Azure, Terraform, Git, GitHub, or GitLab, these resources are invaluable for developers at all levels.
+
+* HTML and CSS Resources for Better Web Development
+
+HTML (HyperText Markup Language) and CSS (Cascading Style Sheets) are the backbone of web development, enabling the creation of structured documents and the styling of web pages. Here are some resources to help you master these essential skills:
+
+- HTML Resources:
+  - Mozilla Developer Network (MDN) HTML: [[https://developer.mozilla.org/en-US/docs/Web/HTML]]
+    A comprehensive resource for learning HTML, offering guides, tutorials, and references for all HTML elements and attributes.
+  - W3Schools HTML Tutorial: [[https://www.w3schools.com/html/]]
+    An easy-to-follow tutorial that covers the basics of HTML, ideal for beginners looking to understand web page structure.
+  - HTML.com: [[https://html.com/]]
+    Offers tutorials and guides on HTML coding, including best practices and examples.
+
+- CSS Resources:
+  - Mozilla Developer Network (MDN) CSS: [[https://developer.mozilla.org/en-US/docs/Web/CSS]]
+    Provides detailed documentation on CSS, including tutorials for beginners, advanced guides, and a comprehensive reference of CSS properties.
+  - CSS-Tricks: [[https://css-tricks.com/]]
+    A popular website offering articles, tutorials, guides, and snippets on how to use various CSS features effectively.
+  - W3Schools CSS Tutorial: [[https://www.w3schools.com/css/]]
+    Features tutorials that range from basic to advanced CSS techniques, including layout, animations, and responsive design.
+
+- Online Courses and Tutorials:
+  - Codecademy: [[https://www.codecademy.com/learn/learn-html]] (HTML) and [[https://www.codecademy.com/learn/learn-css]] (CSS)
+    Interactive learning platform that offers hands-on HTML and CSS courses for beginners.
+  - freeCodeCamp: [[https://www.freecodecamp.org/learn/responsive-web-design/]]
+    Offers a comprehensive Responsive Web Design certification that covers HTML, CSS, and other web design principles.
+  - Udemy: [[https://www.udemy.com/courses/search/?q=html%20css]]
+    Hosts a variety of HTML and CSS courses catering to different skill levels, from basics to advanced techniques.
+
+- Books for Deep Dive:
+  - "HTML and CSS: Design and Build Websites" by Jon Duckett
+    A visually appealing book that introduces HTML and CSS in a clear and accessible way, perfect for beginners.
+  - "CSS: The Definitive Guide" by Eric A. Meyer
+    Considered a must-read for CSS developers of all skill levels, offering in-depth coverage of CSS properties and best practices.
+
+These resources provide a solid foundation for learning and mastering HTML and CSS. Whether you're starting from scratch or looking to enhance your existing skills, these resources offer valuable insights and practical guidance to improve your web development projects.
