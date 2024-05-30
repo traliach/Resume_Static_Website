@@ -1,6 +1,3 @@
-Here's the enhanced content for .org mode:
-
-```org
 #+author: Ali Achille Traore
 #+title: From Static Website Deployment on AWS to Advanced Infrastructure as Code with Terraform
 #+date: <2024-02-25 Sun>
