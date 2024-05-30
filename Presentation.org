@@ -223,10 +223,52 @@ For Windows users, the process is similar. Ensure PowerShell is used for command
 Follow the rest of the steps as outlined above, adjusting paths and commands as necessary for the Windows environment.
 
 * Repository of Resources for Further Learning
-Provides comprehensive links and resources for AWS, Azure, Terraform, Git, GitHub, GitLab, HTML, and CSS.
+AWS (Amazon Web Services): [[https://aws.amazon.com/]]
+  - Amazon S3 (Simple Storage Service): [[https://aws.amazon.com/s3/]]
+  - Amazon Route 53: [[https://aws.amazon.com/route53/]]
+  - AWS Certificate Manager: [[https://aws.amazon.com/certificate-manager/]]
+  - Amazon CloudFront: [[https://aws.amazon.com/cloudfront/]]
+  - AWS Documentation: [[https://docs.aws.amazon.com/index.html]]
+  - AWS Getting Started Resource Center: [[https://aws.amazon.com/getting-started/]]
 
+- Azure:
+  - Microsoft Azure: [[https://azure.microsoft.com/]]
+  - Azure Storage Accounts: [[https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview]]
+  - Azure CDN (Content Delivery Network): [[https://azure.microsoft.com/en-us/services/cdn/]]
+  - Azure DNS: [[https://docs.microsoft.com/en-us/azure/dns/]]
+  - Azure Documentation: [[https://docs.microsoft.com/en-us/azure/]]
+  - Azure DevOps Solutions: [[https://azure.microsoft.com/en-us/solutions/devops/]]
+
+- Version Control and Deployment Automation:
+  - Git: [[https://git-scm.com/doc]]
+  - GitHub: [[https://github.com/]]
+  - GitHub Actions: [[https://github.com/features/actions]]
+  - GitLab: [[https://gitlab.com/]]
+  - GitLab CI/CD: [[https://docs.gitlab.com/ee/ci/]]
+
+- Terraform:
+  - Terraform by HashiCorp: [[https://www.terraform.io/]]
+  - Terraform Documentation: [[https://www.terraform.io/docs]]
+  - Terraform Azure Provider: [[https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs]]
+  - Terraform AWS Provider: [[https://registry.terraform.io/providers/hashicorp/aws/latest/docs]]
+
+- Learning Resources and Tutorials:
+  - AWS Training and Certification: [[https://aws.amazon.com/training/]]
+  - Microsoft Learn for Azure: [[https://docs.microsoft.com/en-us/learn/azure/]]
+  - Terraform Getting Started - Azure: [[https://learn.hashicorp.com/collections/terraform/azure-get-started]]
+  - Terraform Getting Started - AWS: [[https://learn.hashicorp.com/collections/terraform/aws-get-started]]
+
+These links are directed to official documentation and resources that provide extensive information on using these services and tools. Whether you are just starting out or looking to deepen your understanding of specific aspects of AWS, Azure, Terraform, Git, GitHub, or GitLab, these resources are invaluable for developers at all levels.
 * HTML and CSS Resources for Better Web Development
-Highlights tutorials, courses, and books for learning HTML and CSS.
+HTML (HyperText Markup Language) and CSS (Cascading Style Sheets) are the backbone of web development, enabling the creation of structured documents and the styling of web pages. Here are some resources to help you master these essential skills:
+
+- HTML Resources:
+  - Mozilla Developer Network (MDN) HTML: [[https://developer.mozilla.org/en-US/docs/Web/HTML]]
+    A comprehensive resource for learning HTML, offering guides, tutorials, and references for all HTML elements and attributes.
+  - W3Schools HTML Tutorial: [[https://www.w3schools.com/html/]]
+    An easy-to-follow tutorial that covers the basics of HTML, ideal for beginners looking to understand web page structure.
+  - HTML.com: [[https://html.com/]]
+    Offers tutorials and guides on HTML coding, including best practices and examples.
 
 * Conclusion
 From deploying a static website on AWS to adopting advanced Infrastructure as Code practices with Terraform and Terraform CDK, this guide equips developers with the knowledge to manage and scale cloud infrastructure efficiently.
