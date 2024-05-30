@@ -1,12 +1,15 @@
+Here's the enhanced content for .org mode:
+
+```org
 #+author: Ali Achille Traore
 #+title: From Static Website Deployment on AWS to Advanced Infrastructure as Code with Terraform
 #+date: <2024-02-25 Sun>
 
 * Introduction
-This document navigates through deploying static websites from manual deployment on AWS, to automated Terraform deployment on Azure, and advances into Infrastructure as Code practices with Terraform, including the Terraform Cloud Development Kit (CDKTF).
+This document navigates through deploying static websites from manual deployment on AWS to automated Terraform deployment on Azure, and advances into Infrastructure as Code practices with Terraform, including the Terraform Cloud Development Kit (CDKTF).
 
 * Part 1: Build and Deploy a Web-Based Resume Using AWS
-** Step 0: Manual work
+** Step 0: Manual Work
 Deploy a simple resume website using AWS services such as S3, Route 53, AWS Certificate Manager, and CloudFront. This beginner-friendly and cost-effective approach demonstrates the basics of cloud deployment.
 
 ** Prerequisites
@@ -21,14 +24,14 @@ Deploy a simple resume website using AWS services such as S3, Route 53, AWS Cert
 3. Use Route 53 for a Custom Domain.
 4. Set Up SSL/TLS with AWS Certificate Manager.
 5. Create a CloudFront Distribution.
-- Optionally, integrate with GitHub for Continuous Deployment.
+  - Optionally, integrate with GitHub for Continuous Deployment.
 
 ** Conclusion
 - Pros: Beginner-friendly, cost-effective, customizable.
 - Cons: Manual process, AWS-specific, requires regular maintenance.
 
 * Part 2: Azure Online Resume Deployment with Terraform
-** Step 1: Terraform HCL with hardcoded values
+** Step 1: Terraform HCL with Hardcoded Values
 Deploy an online resume on Azure using Terraform, utilizing Azure's Storage Account, CDN, and DNS for global distribution.
 
 ** Prerequisites
@@ -39,8 +42,7 @@ Deploy an online resume on Azure using Terraform, utilizing Azure's Storage Acco
 - Git installed on the local machine.
 
 ** Deployment Steps
-Setup provider configuration, variables, and resources like Resource Group, Storage Account, CDN Profile, and CDN Endpoint.
-Refer to Twelve-Factor App principles and Terraform Input Variables for dynamic configurations.
+Setup provider configuration, variables, and resources like Resource Group, Storage Account, CDN Profile, and CDN Endpoint. Refer to Twelve-Factor App principles and Terraform Input Variables for dynamic configurations.
 
 *** Provider Configuration
 #+BEGIN_SRC terraform
@@ -58,7 +60,7 @@ variable "location" {
 
 variable "storage_account_name" {
   description = "The name of the storage account for hosting the resume site."
-  default     = "achilledevopsdemo123" # Ensure this is unique
+  default     = "achilledevopsdemo123" ;; Ensure this is unique
 }
 
 variable "resource_group_name" {
@@ -115,7 +117,7 @@ resource "azurerm_cdn_endpoint" "resume_cdn_endpoint" {
   resource_group_name = azurerm_resource_group.rg.name
   origin {
     name      = "resumeOrigin"
-    host_name = local.storage_account_hostname
+    host_name = azurerm_storage_account.resume.primary_web_endpoint
   }
 }
 #+END_SRC
@@ -231,3 +233,4 @@ Highlights tutorials, courses, and books for learning HTML and CSS.
 
 * Conclusion
 From deploying a static website on AWS to adopting advanced Infrastructure as Code practices with Terraform and Terraform CDK, this guide equips developers with the knowledge to manage and scale cloud infrastructure efficiently.
+```
